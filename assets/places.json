@@ -1,0 +1,146 @@
+[
+  {
+    "Name": "Flames Restaurant",
+    "Latitude": 30.62077298712324,
+    "Longitude": 32.29340890445067,
+    "Image": "https://media-cdn.tripadvisor.com/media/photo-s/10/4f/4d/5f/flames.jpg",
+    "Restaurant": true,
+    "Lake": false,
+    "Shopping": false
+  },
+  {
+    "Name": "Temsah Lake",
+    "Latitude": 30.575730380220115,
+    "Longitude": 32.287549869925854,
+    "Image": "https://upload.wikimedia.org/wikipedia/commons/7/74/Ismailia_and_Timsah_lake_-_panoramio.jpg",
+    "Restaurant": false,
+    "Lake": true,
+    "Shopping": false
+  },
+  {
+    "Name": "Al-Fairouz Beach Club",
+    "Latitude": 30.572742470687626,
+    "Longitude": 32.27833801125144,
+    "Image": "https://upload.wikimedia.org/wikipedia/commons/7/74/Ismailia_and_Timsah_lake_-_panoramio.jpg",
+    "Restaurant": true,
+    "Lake": true,
+    "Shopping": false
+  },
+  {
+    "Name": "Sala-al-Naby Restaurant",
+    "Latitude": 30.568954651554865,
+    "Longitude": 32.28074871397333,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipOSaEtqOvUpyxx7nHufekoywRerq8UkU3gKYg0J=w500-h240-k-no",
+    "Restaurant": true,
+    "Lake": false,
+    "Shopping": false
+  },
+  {
+    "Name": "Fish land",
+    "Latitude": 30.57044394818246,
+    "Longitude": 32.2778962155231,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipPvpbD5Oq08HnCY9K1QO2wu4flQGhcYGyjMnFrJ=w408-h408-k-no",
+    "Restaurant": true,
+    "Lake": true,
+    "Shopping": false
+  },
+  {
+    "Name": "Haven Pizza",
+    "Latitude": 30.608511354468998,
+    "Longitude": 32.27466349915819,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipPlMO2GXKZFcXp4FPP487sZkwhY5YvC5ml-IDn3=w408-h306-k-no",
+    "Restaurant": true,
+    "Lake": false,
+    "Shopping": false
+  },
+  {
+    "Name": "Dimuscus gate",
+    "Latitude": 30.597771392709085,
+    "Longitude": 32.271932239644435,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipNCf2ekLkUZEa3uwFYqeOugigm-F8lkqjkaSVDf=w408-h680-k-no",
+    "Restaurant": true,
+    "Lake": false,
+    "Shopping": false
+  },
+  {
+    "Name": "Tarek Habib Grilled Food",
+    "Latitude": 30.586693795677213,
+    "Longitude": 32.26312399023664,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipO0h9n-GHJCaTBkjdWbvutNw3jd3m5rv8mCWN_F=w408-h864-k-no",
+    "Restaurant": true,
+    "Lake": false,
+    "Shopping": false
+  },
+  {
+    "Name": "Dimashqy",
+    "Latitude": 30.61341216936083,
+    "Longitude": 32.28320712870052,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipM0Xq00BlFYH_TiZZLPhQV-UgaNVKVZYjjbqk9v=w426-h240-k-no",
+    "Restaurant": true,
+    "Lake": false,
+    "Shopping": false
+  },
+  {
+    "Name": "Tito Pizza Restaurant",
+    "Latitude": 30.56560508079561,
+    "Longitude": 32.28164538125417,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipMx7xs95Xm9LehzeZQr2D1b2IAZt5Ri9mQaJmSl=w427-h240-k-no",
+    "Restaurant": true,
+    "Lake": false,
+    "Shopping": false
+  },
+  {
+    "Name": "Labocca cafe and Restaurant",
+    "Latitude": 30.612405824321836,
+    "Longitude": 32.30635470516549,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipMXf1ku5zU8a7m6WiPj4I832mDCHm5hbKXD18lx=w408-h306-k-no",
+    "Restaurant": true,
+    "Lake": false,
+    "Shopping": false
+  },
+  {
+    "Name": "TAMARA kids",
+    "Latitude": 30.594069194830563,
+    "Longitude": 32.27794840453784,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipNRYNS-WREhN_Sa4C8qmDlG-Jd7O0DUP2-DGkdA=w408-h544-k-no",
+    "Restaurant": false,
+    "Lake": false,
+    "Shopping": true
+  },
+  {
+    "Name": "High City Mall",
+    "Latitude": 30.6053337402625,
+    "Longitude": 32.28513381773866,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipOqtoGZrexCDLKqogs9S7cg8swFaFro4jVqEyoz=w408-h508-k-no",
+    "Restaurant": false,
+    "Lake": false,
+    "Shopping": true
+  },
+  {
+    "Name": "Ismailia City Mall",
+    "Latitude": 30.591481372615274,
+    "Longitude": 32.27472684669903,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipP6uF_1uIbhKuMCDeb_qr6xrPlIjDg1_CZzwI59=w408-h725-k-no",
+    "Restaurant": false,
+    "Lake": false,
+    "Shopping": true
+  },
+  {
+    "Name": "Hassan Abo Ali For Seafood",
+    "Latitude": 30.58590292651228,
+    "Longitude": 32.260543325930925,
+    "Image": "https://lh5.googleusercontent.com/p/AF1QipPKnJ5O673pTUbIsWy02biYSGgb6XjwcXcnTTRr=w408-h271-k-no",
+    "Restaurant": true,
+    "Lake": false,
+    "Shopping": false
+  },
+  {
+    "Name": "Lake View",
+    "Latitude": 30.575890473254976,
+    "Longitude": 32.273804166823126,
+    "Image": "https://static.wixstatic.com/media/e32222_9c1d299732124c5fbe7daa15cce18f78~mv2.jpg/v1/fill/w_980",
+    "Restaurant": "h_505",
+    "Lake": "al_c",
+    "Shopping": "q_85"
+  }
+]

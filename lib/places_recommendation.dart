@@ -1,12 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:path/path.dart';
-import 'package:csv/csv.dart';
+
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PlacesRecommendation extends StatefulWidget {
   @override
@@ -15,31 +12,62 @@ class PlacesRecommendation extends StatefulWidget {
 
 class _PlacesRecommendationState extends State<PlacesRecommendation> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     pickFile(context);
     return Scaffold(
       body: SafeArea(
-        child: FutureBuilder(
-          future: pickFile(context),
-          builder: (d, sna) => Container(
-            child: Center(
-              child: Swiper(
-                itemBuilder: (d, s) => Container(
-                  child: Text('${sna.data[s]['Name']}'),
+        child: Center(
+          child: FutureBuilder(
+            future: pickFile(context),
+            builder: (_, AsyncSnapshot snapshot) => Container(
+              width: MediaQuery.of(context).size.width,
+              height: 400,
+              child: Center(
+                child: Swiper(
+                  curve: Curves.decelerate,
+                  itemBuilder: (BuildContext context, int index) => Container(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Image.network(
+                            '${snapshot.data[index]['Image']}',
+                            width: MediaQuery.of(context).size.width,
+                            height: 300,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('${snapshot.data[index]['Name']}'),
+                          ),
+                          FlatButton(
+                            child: Container(
+                              width: 300,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text('Check on Google Maps'),
+                                  Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Icon(Icons.map_rounded),
+                                  )
+                                ],
+                              ),
+                            ),
+                            onPressed: () => _launchURL(
+                                '${snapshot.data[index]['Longitude']}',
+                                '${snapshot.data[index]['Latitude']}'),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  itemCount: snapshot.data.length,
+                  autoplay: true,
+                  duration: 6,
+                  itemWidth: 400,
+                  fade: 0.3,
+                  autoplayDelay: 5,
                 ),
-                itemCount: sna.data.length,
-                autoplay: true,
-                fade: 0.9,
               ),
             ),
           ),
@@ -55,21 +83,12 @@ class _PlacesRecommendationState extends State<PlacesRecommendation> {
     return jsonResult;
   }
 
-  Future<Map<String, dynamic>> parseJsonFromAssets(String assetsPath) async {
-    print('--- Parse json from: $assetsPath');
-    return rootBundle
-        .loadString(assetsPath)
-        .then((jsonStr) => jsonDecode(jsonStr));
-  }
-
-  assetToFile({String assetPath}) async {
-    Directory directory = await getApplicationDocumentsDirectory();
-
-    var path = join(directory.path, assetPath.split('/')[2]);
-    ByteData data = await rootBundle.load(assetPath);
-    List<int> bytes =
-        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    var file = await File(path).writeAsBytes(bytes);
-    return file.path;
+  _launchURL(long, lat) async {
+    var uri = Uri.parse("google.navigation:q=$lat,$long&mode=d");
+    if (await canLaunch(uri.toString())) {
+      await launch(uri.toString());
+    } else {
+      throw 'Could not launch ${uri.toString()}';
+    }
   }
 }

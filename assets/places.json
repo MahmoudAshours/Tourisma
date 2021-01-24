@@ -1,5 +1,6 @@
 [
   {
+    "id": 0,
     "Name": "Flames Restaurant",
     "Latitude": 30.62077298712324,
     "Longitude": 32.29340890445067,
@@ -9,6 +10,7 @@
     "Shopping": false
   },
   {
+    "id": 1,
     "Name": "Temsah Lake",
     "Latitude": 30.575730380220115,
     "Longitude": 32.287549869925854,
@@ -18,6 +20,7 @@
     "Shopping": false
   },
   {
+    "id": 2,
     "Name": "Al-Fairouz Beach Club",
     "Latitude": 30.572742470687626,
     "Longitude": 32.27833801125144,
@@ -27,6 +30,7 @@
     "Shopping": false
   },
   {
+    "id": 3,
     "Name": "Sala-al-Naby Restaurant",
     "Latitude": 30.568954651554865,
     "Longitude": 32.28074871397333,
@@ -36,6 +40,7 @@
     "Shopping": false
   },
   {
+    "id": 4,
     "Name": "Fish land",
     "Latitude": 30.57044394818246,
     "Longitude": 32.2778962155231,
@@ -45,6 +50,7 @@
     "Shopping": false
   },
   {
+    "id": 5,
     "Name": "Haven Pizza",
     "Latitude": 30.608511354468998,
     "Longitude": 32.27466349915819,
@@ -54,6 +60,7 @@
     "Shopping": false
   },
   {
+    "id": 7,
     "Name": "Dimuscus gate",
     "Latitude": 30.597771392709085,
     "Longitude": 32.271932239644435,
@@ -63,6 +70,7 @@
     "Shopping": false
   },
   {
+    "id": 8,
     "Name": "Tarek Habib Grilled Food",
     "Latitude": 30.586693795677213,
     "Longitude": 32.26312399023664,
@@ -72,6 +80,7 @@
     "Shopping": false
   },
   {
+    "id": 9,
     "Name": "Dimashqy",
     "Latitude": 30.61341216936083,
     "Longitude": 32.28320712870052,
@@ -81,6 +90,7 @@
     "Shopping": false
   },
   {
+    "id": 10,
     "Name": "Tito Pizza Restaurant",
     "Latitude": 30.56560508079561,
     "Longitude": 32.28164538125417,
@@ -90,6 +100,7 @@
     "Shopping": false
   },
   {
+    "id": 11,
     "Name": "Labocca cafe and Restaurant",
     "Latitude": 30.612405824321836,
     "Longitude": 32.30635470516549,
@@ -99,6 +110,7 @@
     "Shopping": false
   },
   {
+    "id": 12,
     "Name": "TAMARA kids",
     "Latitude": 30.594069194830563,
     "Longitude": 32.27794840453784,
@@ -108,6 +120,7 @@
     "Shopping": true
   },
   {
+    "id": 13,
     "Name": "High City Mall",
     "Latitude": 30.6053337402625,
     "Longitude": 32.28513381773866,
@@ -117,6 +130,7 @@
     "Shopping": true
   },
   {
+    "id": 15,
     "Name": "Ismailia City Mall",
     "Latitude": 30.591481372615274,
     "Longitude": 32.27472684669903,
@@ -126,6 +140,7 @@
     "Shopping": true
   },
   {
+    "id": 16,
     "Name": "Hassan Abo Ali For Seafood",
     "Latitude": 30.58590292651228,
     "Longitude": 32.260543325930925,
@@ -135,12 +150,13 @@
     "Shopping": false
   },
   {
+    "id": 17,
     "Name": "Lake View",
     "Latitude": 30.575890473254976,
     "Longitude": 32.273804166823126,
     "Image": "https://diarnaegypt.com/wp-content/uploads/WPL/216/thimg_7c00dd61-3d8d-4b83-9de6-5f5f529f0adf-1-_autox420.jpg",
-    "Restaurant": "h_505",
-    "Lake": "al_c",
-    "Shopping": "q_85"
+    "Restaurant": false,
+    "Lake": true,
+    "Shopping": false
   }
 ]

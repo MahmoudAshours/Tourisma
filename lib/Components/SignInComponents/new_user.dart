@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:nav_router/nav_router.dart';
-import 'package:volcano/Screens/Authentication/sign_up.dart';
-
+import 'package:places_recommendation/Authentication/sign_up.dart';
+ 
 class NewUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

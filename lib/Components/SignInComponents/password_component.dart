@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:volcano/Provider/AuthBloc/signin_bloc.dart';
-import 'package:volcano/Utils/animated_textfeild.dart';
+import 'package:places_recommendation/Provider/AuthBloc/signin_bloc.dart';
+import 'package:places_recommendation/Utils/animated_textfeild.dart';
+import 'package:provider/provider.dart'; 
 
 class PasswordComponent extends StatefulWidget {
   @override

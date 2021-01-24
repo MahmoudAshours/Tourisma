@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gradient_text/gradient_text.dart';
+import 'package:places_recommendation/Provider/AuthBloc/signin_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:volcano/Provider/AuthBloc/signin_bloc.dart';
-
+ 
 class SignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:places_recommendation/Provider/AuthBloc/signin_bloc.dart';
 import 'package:places_recommendation/Screens/places_list.dart';
 import 'package:places_recommendation/Screens/trip_list.dart';
 
 class PlacesRecommendation extends StatefulWidget {
+  final String uid;
+  final SignInBloc bloc;
+  PlacesRecommendation({this.uid, this.bloc});
   @override
   _PlacesRecommendationState createState() => _PlacesRecommendationState();
 }
 
 class _PlacesRecommendationState extends State<PlacesRecommendation> {
+  @override
+  void initState() {
+    if (widget.uid != null) widget.bloc..userUID = widget.uid;
+    super.initState();
+  }
+
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {

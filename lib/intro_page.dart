@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
 import 'package:places_recommendation/Authentication/sign_in.dart';
+import 'package:places_recommendation/Themes/themes.dart';
 import 'package:shared_preferences/shared_preferences.dart'; 
 class IntroPage extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _IntroPageState extends State<IntroPage> {
             checkIntro();
             routePush(SignIn(), RouterType.fade);
           }),
-      backgroundColor:Colors.white,
+      backgroundColor: themes.primaryColor,
       body: DotPaginationSwiper(
         onPageChanged: (int i) {
           if (i == 1) {
@@ -129,7 +130,10 @@ class _IntroPageState extends State<IntroPage> {
                   size: 30,
                 ),
                 SizedBox(width: 10),
-              
+                Text(
+                  'Volcano',
+                  style: TextStyle(color: Colors.white, fontSize: 30),
+                )
               ],
             ),
           ),
@@ -139,10 +143,10 @@ class _IntroPageState extends State<IntroPage> {
             child: Container(
               width: 300,
               child: Text(
-                'Find your favorite places!.',
+                'Suffer from depression? No problem, here you can share, and interact with people who can understand you.',
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 17,
+                  color: Colors.white.withAlpha(65),
+                  fontSize: 14,
                 ),
               ),
             ),

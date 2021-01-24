@@ -7,7 +7,7 @@ class NewUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => routePush(SignUp(), RouterType.size),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_)=>SignUp())),
       child: Container(
         child: GradientText(
           "Create new account!",

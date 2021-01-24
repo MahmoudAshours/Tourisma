@@ -29,6 +29,18 @@ dependencies:
   url_launcher: ^5.7.10
   dio: ^3.0.10
   animate_do: ^1.7.5 
+  firebase_core: ^0.7.0
+  firebase_auth: ^0.20.0+1
+  cloud_firestore: ^0.16.0
+  provider: ^4.0.5
+  font_awesome_flutter: ^8.8.1
+  flutter_circular_text: "^0.3.0"
+  gradient_text: ^1.0.2
+  flutter_spinkit: "^4.1.2"
+  flutter_native_splash: ^0.1.9
+  flutter_launcher_icons: ^0.7.5
+  nav_router: ^0.0.5
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

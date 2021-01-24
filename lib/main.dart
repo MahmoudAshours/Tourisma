@@ -4,40 +4,43 @@ import 'package:flutter/material.dart';
 import 'package:places_recommendation/Authentication/sign_in.dart';
 import 'package:places_recommendation/Provider/AuthBloc/signin_bloc.dart';
 import 'package:places_recommendation/Screens/places_recommendation.dart';
+import 'package:places_recommendation/intro_page.dart';
 import 'package:places_recommendation/providers.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(Providers(
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: await checkIntro()
+          ? IntroPage()
+          : Consumer<SignInBloc>(
+              builder: (_, bloc, __) {
+                return StreamBuilder<User>(
+                  stream: bloc.checkAuth(),
+                  builder: (_, AsyncSnapshot<User> snapshot) {
+                    if (snapshot.hasData && snapshot.data != null) {
+                      return PlacesRecommendation(
+                          bloc: bloc, uid: snapshot.data.uid);
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else {
+                      return SignIn();
+                    }
+                  },
+                );
+              },
+            ),
+      theme: ThemeData(fontFamily: 'Noyh'),
+    ),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return Providers(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Consumer<SignInBloc>(
-          builder: (_, bloc, __) {
-            return StreamBuilder<User>(
-              stream: bloc.checkAuth(),
-              builder: (_, AsyncSnapshot<User> snapshot) {
-                if (snapshot.hasData && snapshot.data != null) {
-                  return PlacesRecommendation(
-                      bloc: bloc, uid: snapshot.data.uid);
-                } else if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else {
-                  return SignIn();
-                }
-              },
-            );
-          },
-        ),
-        theme: ThemeData(fontFamily: 'Noyh'),
-      ),
-    );
-  }
+Future<bool> checkIntro() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getBool('intro') ?? true;
 }

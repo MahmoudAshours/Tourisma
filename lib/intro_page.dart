@@ -1,9 +1,10 @@
- import 'package:dot_pagination_swiper/dot_pagination_swiper.dart';
+import 'package:dot_pagination_swiper/dot_pagination_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
 import 'package:places_recommendation/Authentication/sign_in.dart';
 import 'package:places_recommendation/Themes/themes.dart';
-import 'package:shared_preferences/shared_preferences.dart'; 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class IntroPage extends StatefulWidget {
   @override
   _IntroPageState createState() => _IntroPageState();
@@ -72,7 +73,6 @@ class _IntroPageState extends State<IntroPage> {
               ],
             ),
           ),
-
         ],
       ),
     );

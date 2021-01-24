@@ -16,11 +16,12 @@ Future<void> main() async {
   runApp(
     Providers(
       child: MaterialApp(
+        theme: themes,
         debugShowCheckedModeBanner: false,
         home: await checkIntro()
             ? IntroPage()
             : Consumer<SignInBloc>(
-                builder: (_, bloc, __) {
+                builder: (_, SignInBloc bloc, __) {
                   return StreamBuilder<User>(
                     stream: bloc.checkAuth(),
                     builder: (_, AsyncSnapshot<User> snapshot) {
@@ -37,7 +38,6 @@ Future<void> main() async {
                   );
                 },
               ),
-        theme: themes,
       ),
     ),
   );

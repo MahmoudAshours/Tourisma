@@ -39,7 +39,7 @@ dependencies:
   flutter_spinkit: "^4.1.2"
   flutter_native_splash: ^0.1.9
   flutter_launcher_icons: ^0.7.5
-  nav_router: ^0.0.5
+  nav_router: ^0.0.7
   shared_preferences: ^0.5.12+4
   dot_pagination_swiper: ^0.1.1
   

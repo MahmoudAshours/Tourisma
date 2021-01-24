@@ -78,21 +78,21 @@ class PlacesList extends StatelessWidget {
     );
   }
 
-  getData(index) async {
+  Future getData(int index) async {
     Response response;
     Dio dio = Dio();
     response = await dio.get("http://10.0.2.2:5000/api/$index");
     print(response);
   }
 
-  pickFile(context) async {
+  Future pickFile(BuildContext context) async {
     String data =
         await DefaultAssetBundle.of(context).loadString("assets/places.json");
     final jsonResult = json.decode(data);
     return jsonResult;
   }
 
-  _launchURL(long, lat) async {
+  Future _launchURL(String long, String lat) async {
     var uri = Uri.parse("google.navigation:q=$lat,$long&mode=d");
     if (await canLaunch(uri.toString())) {
       await launch(uri.toString());

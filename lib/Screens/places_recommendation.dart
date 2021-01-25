@@ -31,7 +31,9 @@ class _PlacesRecommendationState extends State<PlacesRecommendation> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _currentIndex == 0 ? PlacesList(widget.uid) : TripList(),
+              _currentIndex == 0
+                  ? PlacesList(widget.uid)
+                  : TripList(uid: widget.uid),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(

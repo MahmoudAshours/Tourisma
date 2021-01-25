@@ -16,7 +16,7 @@ class PlacesList extends StatelessWidget {
   Widget build(BuildContext context) {
     final _bloc = Provider.of<PlacesBloc>(context);
     return Expanded(
-      flex: 01,
+      flex: 1,
       child: Padding(
         padding: const EdgeInsets.only(top: 60.0),
         child: FadeInUp(
@@ -125,14 +125,7 @@ class PlacesList extends StatelessWidget {
       ),
     );
   }
-
-  Future getData(int index) async {
-    Response response;
-    Dio dio = Dio();
-    response = await dio.get("http://10.0.2.2:5000/api/$index");
-    print(response);
-  }
-
+ 
   Future pickFile(BuildContext context) async {
     String data =
         await DefaultAssetBundle.of(context).loadString("assets/places.json");

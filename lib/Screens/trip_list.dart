@@ -8,7 +8,28 @@ import 'package:provider/provider.dart';
 class TripList extends StatelessWidget {
   final uid;
 
-  const TripList({Key key, this.uid}) : super(key: key);
+  addToMap(_bloc) async {
+    Stream<QuerySnapshot> s = _bloc.getUserPlaces(userID: uid);
+
+    for (int i = 0; i < 16; i++) {
+      s.forEach(
+        (element) => sd.putIfAbsent(
+          element.docs[i].id,
+          () => element.docs[i].data(),
+        ),
+      );
+    }
+
+    await Dio()
+        .post(
+          "http://10.0.2.2:5000/api",
+          data: sd,
+        )
+        .then((value) => print(value.data));
+  }
+
+  Map sd = Map();
+  TripList({Key key, this.uid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +39,7 @@ class TripList extends StatelessWidget {
         children: [
           Text('PortSaid', style: TextStyle(color: Colors.white)),
           GestureDetector(
-            onTap: () async {
-              Map sd = {}; 
-              Stream<QuerySnapshot> s = _bloc.getUserPlaces(userID: uid);
-
-              for (int i = 0; i < 16; i++) {
-                s.forEach((element) => sd.putIfAbsent(
-                    element.docs[i].id, () => element.docs[i].data()));
-              }
-
-              print(sd);
-              // await Dio()
-              //     .post(
-              //       "http://10.0.2.2:5000/api",
-              //       data: s,
-              //     )
-              //     .then((value) => print(value.data));
-            },
+            onTap: () => addToMap(_bloc),
             child: Container(
               child: Center(
                 child: GestureDetector(

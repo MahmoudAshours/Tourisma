@@ -42,6 +42,8 @@ dependencies:
   nav_router: ^0.0.7
   shared_preferences: ^0.5.12+4
   dot_pagination_swiper: ^0.1.1
+  flutter_rating_bar: ^3.2.0+1
+
   
 dev_dependencies:
   flutter_test:

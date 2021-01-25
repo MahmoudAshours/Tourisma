@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:places_recommendation/Provider/AuthBloc/signin_bloc.dart';
 import 'package:places_recommendation/Screens/places_list.dart';
@@ -15,7 +18,33 @@ class _PlacesRecommendationState extends State<PlacesRecommendation> {
   @override
   void initState() {
     if (widget.uid != null) widget.bloc..userUID = widget.uid;
+    populate();
     super.initState();
+  }
+
+  populate() async {
+    String data =
+        await DefaultAssetBundle.of(context).loadString("assets/places.json");
+    final jsonResult = json.decode(data);
+    for (var i in jsonResult) {
+      print(i);
+      FirebaseFirestore.instance
+          .collection('UserPlaces')
+          .doc(widget.uid)
+          .collection("Places")
+          .doc(i['Name'])
+          .set({
+        "ID": i['id'],
+        "Latitude": i['Latitude'],
+        "Longitude": i['Longitude'],
+        "Image": i['Image'],
+        "hasLake": (i['hasLake']),
+        "isRestaurant": (i['isRestaurant']),
+        "isShopping": (i['isShopping']),
+        "Rate": i["Rate"]
+      });
+    }
+    return null;
   }
 
   int _currentIndex = 0;
@@ -28,81 +57,84 @@ class _PlacesRecommendationState extends State<PlacesRecommendation> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () => setState(() => _currentIndex = 0),
-                    child: Container(
-                      width: 150,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            colors: [
-                              Color(0xff7558FF),
-                              Color(0xff3396FF),
-                              Color(0xff1AB0FF)
-                            ]),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.place,
-                              color: Colors.white,
+              _currentIndex == 0 ? PlacesList(widget.uid) : TripList(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () => setState(() => _currentIndex = 0),
+                      child: Container(
+                        width: 150,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              colors: [
+                                Color(0xff7558FF),
+                                Color(0xff3396FF),
+                                Color(0xff1AB0FF)
+                              ]),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.place,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Ratings',
-                            style: TextStyle(fontSize: 21, color: Colors.white),
-                          ),
-                        ],
+                            Text(
+                              'Ratings',
+                              style: TextStyle(fontSize: 21, color: Colors.white),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () => setState(() => _currentIndex = 1),
-                    child: Container(
-                      width: 150,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            colors: [
-                              Color(0xffFFC300),
-                              Color(0xffFFB400),
-                              Color(0xffFF9E00)
-                            ]),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.trip_origin_rounded,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'Trip',
-                            style: TextStyle(
-                                fontSize: 21,
+                    GestureDetector(
+                      onTap: () => setState(() => _currentIndex = 1),
+                      child: Container(
+                        width: 150,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              colors: [
+                                Color(0xffFFC300),
+                                Color(0xffFFB400),
+                                Color(0xffFF9E00)
+                              ]),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.trip_origin_rounded,
                                 color: Colors.black,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
+                              ),
+                            ),
+                            Text(
+                              'Trip',
+                              style: TextStyle(
+                                  fontSize: 21,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              _currentIndex == 0 ? PlacesList() : TripList()
             ],
           ),
         ),

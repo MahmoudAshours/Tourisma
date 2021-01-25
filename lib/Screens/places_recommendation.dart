@@ -18,33 +18,7 @@ class _PlacesRecommendationState extends State<PlacesRecommendation> {
   @override
   void initState() {
     if (widget.uid != null) widget.bloc..userUID = widget.uid;
-    populate();
     super.initState();
-  }
-
-  populate() async {
-    String data =
-        await DefaultAssetBundle.of(context).loadString("assets/places.json");
-    final jsonResult = json.decode(data);
-    for (var i in jsonResult) {
-      print(i);
-      FirebaseFirestore.instance
-          .collection('UserPlaces')
-          .doc(widget.uid)
-          .collection("Places")
-          .doc(i['Name'])
-          .set({
-        "ID": i['id'],
-        "Latitude": i['Latitude'],
-        "Longitude": i['Longitude'],
-        "Image": i['Image'],
-        "hasLake": (i['hasLake']),
-        "isRestaurant": (i['isRestaurant']),
-        "isShopping": (i['isShopping']),
-        "Rate": i["Rate"]
-      });
-    }
-    return null;
   }
 
   int _currentIndex = 0;
@@ -90,7 +64,8 @@ class _PlacesRecommendationState extends State<PlacesRecommendation> {
                             ),
                             Text(
                               'Ratings',
-                              style: TextStyle(fontSize: 21, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 21, color: Colors.white),
                             ),
                           ],
                         ),

@@ -1,9 +1,12 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
 import 'package:places_recommendation/Provider/AuthBloc/validators.dart';
 import 'package:places_recommendation/Screens/places_recommendation.dart';
-import 'package:places_recommendation/Services/auth_service.dart'; 
+import 'package:places_recommendation/Services/auth_service.dart';
 
 class SignUpBloc with ChangeNotifier {
   String email;
@@ -17,6 +20,30 @@ class SignUpBloc with ChangeNotifier {
   var _userUID;
 
   get userUID => _userUID;
+
+  populate(context, uid) async {
+    String data =
+        await DefaultAssetBundle.of(context).loadString("assets/places.json");
+    final jsonResult = json.decode(data);
+    for (var i in jsonResult) {
+      FirebaseFirestore.instance
+          .collection('UserPlaces')
+          .doc(uid)
+          .collection("Places")
+          .doc(i['Name'])
+          .set({
+        "ID": i['id'],
+        "Latitude": i['Latitude'],
+        "Longitude": i['Longitude'],
+        "Image": i['Image'],
+        "hasLake": (i['hasLake']),
+        "isRestaurant": (i['isRestaurant']),
+        "isShopping": (i['isShopping']),
+        "Rate": i["Rate"]
+      });
+    }
+    return null;
+  }
 
   void signUp(BuildContext context) {
     if (!_validator.validateEmailMessage(email)) {
@@ -37,6 +64,7 @@ class SignUpBloc with ChangeNotifier {
         (String uid) {
           if (uid != null) {
             _userUID = uid;
+            populate(context, uid);
             notifyListeners();
             routePush(PlacesRecommendation(), RouterType.fade);
           }

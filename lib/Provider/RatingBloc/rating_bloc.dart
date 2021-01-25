@@ -5,12 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PlacesBloc with ChangeNotifier {
-  String _uid;
-  set uid(uid) {
-    _uid = uid;
-    notifyListeners();
-  }
-
   Future<DocumentReference> addUsersRate(context, placeName, rate, uid) async {
     FirebaseFirestore.instance
         .collection('UserPlaces')

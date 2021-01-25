@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:places_recommendation/Provider/AuthBloc/signin_bloc.dart';
 import 'package:places_recommendation/Screens/places_list.dart';

@@ -14,6 +14,7 @@ class PlacesBloc with ChangeNotifier {
   }
 
   Stream<QuerySnapshot> getUserPlaces({userID}) {
+    print('oasdbject');
     return FirebaseFirestore.instance
         .collection('UserPlaces')
         .doc(userID)

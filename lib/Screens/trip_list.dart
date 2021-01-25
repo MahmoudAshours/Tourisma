@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:places_recommendation/Provider/RatingBloc/rating_bloc.dart';
@@ -18,12 +19,21 @@ class TripList extends StatelessWidget {
           Text('PortSaid', style: TextStyle(color: Colors.white)),
           GestureDetector(
             onTap: () async {
-              var s =  _bloc.getUserPlaces(userID: uid);
-              print('object');
-               await Dio().post(
-                "http://10.0.2.2:5000/api",
-                data: {'s':'d'},
-              );
+              Map sd = {}; 
+              Stream<QuerySnapshot> s = _bloc.getUserPlaces(userID: uid);
+
+              for (int i = 0; i < 16; i++) {
+                s.forEach((element) => sd.putIfAbsent(
+                    element.docs[i].id, () => element.docs[i].data()));
+              }
+
+              print(sd);
+              // await Dio()
+              //     .post(
+              //       "http://10.0.2.2:5000/api",
+              //       data: s,
+              //     )
+              //     .then((value) => print(value.data));
             },
             child: Container(
               child: Center(

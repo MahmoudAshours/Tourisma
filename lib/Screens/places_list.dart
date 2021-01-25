@@ -44,9 +44,9 @@ class PlacesList extends StatelessWidget {
                                         fontSize: 21, color: Colors.white),
                                   ),
                                   RatingBar.builder(
-                                    initialRating: snapshot.data.docs[index]
-                                            .data()['Rate'] *
-                                        1.0,
+                                    initialRating:
+                                        snapshot.data.docs[index].get('Rate') *
+                                            1.0,
                                     minRating: 0,
                                     direction: Axis.horizontal,
                                     allowHalfRating: true,
@@ -68,7 +68,7 @@ class PlacesList extends StatelessWidget {
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(30),
                                     child: Image.network(
-                                      '${snapshot.data.docs[index].data()['Image']}',
+                                      '${snapshot.data.docs[index].get('Image')}',
                                       height: 300,
                                     ),
                                   ),
@@ -105,8 +105,8 @@ class PlacesList extends StatelessWidget {
                                       ),
                                     ),
                                     onPressed: () => _launchURL(
-                                        '${snapshot.data.docs[index].data()['Longitude']}',
-                                        '${snapshot.data.docs[index].data()['Latitude']}'),
+                                        '${snapshot.data.docs[index].get('Longitude')}',
+                                        '${snapshot.data.docs[index].get('Latitude')}'),
                                   )
                                 ],
                               ),
@@ -125,7 +125,7 @@ class PlacesList extends StatelessWidget {
       ),
     );
   }
- 
+
   Future pickFile(BuildContext context) async {
     String data =
         await DefaultAssetBundle.of(context).loadString("assets/places.json");

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
@@ -7,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:places_recommendation/Provider/RatingBloc/rating_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class TripList extends StatefulWidget {
   final uid;
@@ -19,14 +18,15 @@ class TripList extends StatefulWidget {
 }
 
 class _TripListState extends State<TripList> {
-  var value;
+  var result;
+
+  Map sd = Map();
   addToMap(_bloc) async {
     Stream<QuerySnapshot> s = _bloc.getUserPlaces(userID: widget.uid);
 
     for (int i = 0; i < 16; i++) {
       s.forEach(
         (element) {
-          print(element.docs[i].data());
           return sd.putIfAbsent(
             element.docs[i].id,
             () {
@@ -39,7 +39,7 @@ class _TripListState extends State<TripList> {
     FormData formData = new FormData();
     Dio().options.headers = {"content-type": 'application/json'};
     formData.fields.add(MapEntry('data', json.encode(sd)));
- 
+
     try {
       await Dio()
           .post(
@@ -50,17 +50,15 @@ class _TripListState extends State<TripList> {
                 contentType: 'application/json',
                 responseType: ResponseType.json),
           )
-          .then((value) => setState(() => value = value.data));
+          .then((value) => setState(() => result = value.data));
     } catch (e) {
       print('object');
-    } 
-    print(value.runtimeType);
+    }
   }
-
-  Map sd = Map();
 
   @override
   Widget build(BuildContext context) {
+    print(result);
     final _bloc = Provider.of<PlacesBloc>(context);
     return FadeInUp(
       child: Column(
@@ -96,26 +94,78 @@ class _TripListState extends State<TripList> {
               ),
             ),
           ),
-          value == null
+          result == null
               ? SizedBox()
-              : Swiper(
-                  itemCount: 3,
-                  curve: Curves.decelerate,
-                  itemBuilder: (BuildContext context, int index) => Container(
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            'Places in Ismailia to rate!',
-                            style: TextStyle(fontSize: 21, color: Colors.white),
+              : Padding(
+                padding: const EdgeInsets.only(top:18.0),
+                child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
+                    child: Swiper(
+                      itemCount: 3,
+                      curve: Curves.decelerate,
+                      itemBuilder: (BuildContext context, int index) => Container(
+                        child: Center(
+                          child: Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: Image.network(
+                                  '${result['$index'][0]['Image']}',
+                                  height: 200,
+                                ),
+                              ),
+                              FadeInUp(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '${result['$index'][0]['Name']}',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 21),
+                                  ),
+                                ),
+                              ),
+                              FlatButton(
+                                child: Container(
+                                  width: 300,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Check on Google Maps',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 19),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Icon(Icons.map_rounded),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                onPressed: () {
+                                  _launchURL('${result['$index'][0]['Longitude']}', '${result['$index'][0]['Latitude']}');
+                                },
+                              )
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
-                ),
+              )
         ],
       ),
     );
+  }
+
+  Future _launchURL(String long, String lat) async {
+    var uri = Uri.parse("google.navigation:q=$lat,$long&mode=d");
+    if (await canLaunch(uri.toString())) {
+      await launch(uri.toString());
+    } else {
+      throw 'Could not launch ${uri.toString()}';
+    }
   }
 }

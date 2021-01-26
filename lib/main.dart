@@ -17,6 +17,7 @@ Future<void> main() async {
     Providers(
       child: MaterialApp(
         theme: themes,
+        title: "Places",
         debugShowCheckedModeBanner: false,
         home: await checkIntro()
             ? IntroPage()

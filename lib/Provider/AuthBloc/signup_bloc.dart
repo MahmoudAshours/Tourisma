@@ -32,14 +32,16 @@ class SignUpBloc with ChangeNotifier {
           .collection("Places")
           .doc(i['Name'])
           .set({
-        "ID": i['id'],
+        "ID": 1,
+        "PlaceID": i['id'],
         "Latitude": i['Latitude'],
         "Longitude": i['Longitude'],
         "Image": i['Image'],
         "hasLake": (i['hasLake']),
         "isRestaurant": (i['isRestaurant']),
         "isShopping": (i['isShopping']),
-        "Rate": i["Rate"]
+        "Rate": i["Rate"],
+        "Name": i['Name']
       });
     }
     return null;

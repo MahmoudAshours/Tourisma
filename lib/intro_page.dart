@@ -67,7 +67,7 @@ class _IntroPageState extends State<IntroPage> {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  'Depression cure',
+                  'Tourisma',
                   style: TextStyle(color: Colors.white, fontSize: 30),
                 )
               ],

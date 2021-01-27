@@ -19,7 +19,7 @@ class TripList extends StatefulWidget {
 
 class _TripListState extends State<TripList> {
   var result;
-
+  var ipaddress = "192.168.1.22";
   Map sd = Map();
   addToMap(_bloc) async {
     Stream<QuerySnapshot> s = _bloc.getUserPlaces(userID: widget.uid);
@@ -43,7 +43,7 @@ class _TripListState extends State<TripList> {
     try {
       await Dio()
           .post(
-            "http://10.0.2.2:5000/api",
+            "http://$ipaddress:5000/api",
             data: formData,
             options: Options(
                 method: 'POST',
@@ -64,6 +64,19 @@ class _TripListState extends State<TripList> {
       child: Column(
         children: [
           Text('PortSaid', style: TextStyle(color: Colors.white)),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 300,
+              child: TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), hintText: 'IP address'),
+                onChanged: (value) {
+                  setState(() => ipaddress = value);
+                },
+              ),
+            ),
+          ),
           GestureDetector(
             onTap: () => addToMap(_bloc),
             child: Container(
@@ -85,7 +98,7 @@ class _TripListState extends State<TripList> {
                     ),
                     child: Center(
                       child: Text(
-                        'Recommend me!',
+                        'Recommend!',
                         style: TextStyle(fontSize: 21, color: Colors.white),
                       ),
                     ),
@@ -97,14 +110,15 @@ class _TripListState extends State<TripList> {
           result == null
               ? SizedBox()
               : Padding(
-                padding: const EdgeInsets.only(top:18.0),
-                child: Container(
+                  padding: const EdgeInsets.only(top: 18.0),
+                  child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: 300,
                     child: Swiper(
                       itemCount: 3,
                       curve: Curves.decelerate,
-                      itemBuilder: (BuildContext context, int index) => Container(
+                      itemBuilder: (BuildContext context, int index) =>
+                          Container(
                         child: Center(
                           child: Column(
                             children: [
@@ -130,7 +144,8 @@ class _TripListState extends State<TripList> {
                                   width: 300,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         'Check on Google Maps',
@@ -145,7 +160,9 @@ class _TripListState extends State<TripList> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  _launchURL('${result['$index'][0]['Longitude']}', '${result['$index'][0]['Latitude']}');
+                                  _launchURL(
+                                      '${result['$index'][0]['Longitude']}',
+                                      '${result['$index'][0]['Latitude']}');
                                 },
                               )
                             ],
@@ -154,7 +171,7 @@ class _TripListState extends State<TripList> {
                       ),
                     ),
                   ),
-              )
+                )
         ],
       ),
     );

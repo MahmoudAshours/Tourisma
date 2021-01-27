@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nav_router/nav_router.dart';
 import 'package:places_recommendation/Provider/AuthBloc/validators.dart';
 import 'package:places_recommendation/Screens/places_recommendation.dart';
 import 'package:places_recommendation/Services/auth_service.dart';
@@ -68,7 +67,8 @@ class SignUpBloc with ChangeNotifier {
             _userUID = uid;
             populate(context, uid);
             notifyListeners();
-            routePush(PlacesRecommendation(), RouterType.fade);
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => PlacesRecommendation(uid: uid,)));
           }
         },
       );

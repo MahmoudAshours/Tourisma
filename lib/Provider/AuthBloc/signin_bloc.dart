@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nav_router/nav_router.dart';
 import 'package:places_recommendation/Screens/places_recommendation.dart';
-import 'package:places_recommendation/Services/auth_service.dart'; 
+import 'package:places_recommendation/Services/auth_service.dart';
+
 class SignInBloc with ChangeNotifier {
   String email;
   String password;
@@ -9,7 +9,7 @@ class SignInBloc with ChangeNotifier {
   var _userUID;
 
   set userUID(uid) {
-    _userUID = uid; 
+    _userUID = uid;
   }
 
   get getUserUID => _userUID;
@@ -20,7 +20,8 @@ class SignInBloc with ChangeNotifier {
         if (uid != null) {
           _userUID = uid;
           notifyListeners();
-          routePush(PlacesRecommendation(), RouterType.fade);
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => PlacesRecommendation(uid: _userUID,)));
           notifyListeners();
         }
       },

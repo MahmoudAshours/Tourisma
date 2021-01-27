@@ -12,7 +12,7 @@ import 'package:places_recommendation/providers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(
     Providers(
       child: MaterialApp(
